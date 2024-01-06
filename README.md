@@ -1,35 +1,55 @@
-# Overview
+# East River Winter Wind Storms Characteristics and the Relationship to Seasonal Sublimation and Water Resources.
 
-A template file and folder structure for a data analysis project/paper done with R/Quarto/Github. 
+## Overview
 
-# Pre-requisites
+Welcome to the repository for project focused on studying strong wind events within the East River valley, how often they occur, and their influence on sublimation and water resources within the river basin. This project is ongoing so check back for periodic updates!
+<!-- [![DOI](zenodo.fill_in_this_blank.svg)](https://zenodo.org/account/settings/github/repository/dlhogan97/fill_in_this_blank) -->
+## Repository Structure
 
-This is a template for a data analysis project using R, Quarto, Github and a reference manager that can handle bibtex. It is also assumed that you have a word processor installed (e.g. MS Word or [LibreOffice](https://www.libreoffice.org/)). You need that software stack to make use of this template.
+The repository is organized as follows:
 
-# Template structure
+- **01_data**: Contains all notebooks and data (see **Data Preparation** below) used in the analysis.
+    - **get_reanalysis_data**: Contains scripts to download reanalysis data. Note a cdsapi token is required. You can get token information [here](https://cds.climate.copernicus.eu/api-how-to)
+    - **proecessed_data**: Contains data files after processing is complete
+    - **raw_data**: Contains data files directly downloaded from sources
+- **02_analysis**: Contains other scripts used during data exploration
+    - **data_exploration**: Contains scripts and notebooks for exploring large-scale and intense wind events within the East River valley.
+- **03_results**: scripts and notebooks to produce figures and tables to be used later.
+- **04_products**: manuscript files, slides, and figures produced throughout the project.
+- **LICENSE**: The license file for this repository.
 
-* All data goes into the subfolders inside the `data` folder.
-* All code goes into the `code` folder or subfolders.
-* All results (figures, tables, computed values) go into `results` folder or subfolders.
-* All products (manuscripts, supplement, presentation slides, web apps, etc.) go into `products` subfolders.
-* See the various `readme.md` files in those folders for some more information.
+## Data
 
-# Template content 
+<!-- The data used in this research can be obtained [here](10.5281/zenodo.10056373). Please download the data and place it in the `data/` directory before running the analysis. -->
 
-The template comes with a few files that are meant as illustrative examples of the kinds of content you would place in the different folders. See the `readme` files in each folder for more details.
+## Analysis Steps
 
-* There is a simple, made-up dataset in the `raw_data` folder. 
-* The `processing_code` folder contains several files that load the raw data, perform a bit of cleaning, and save the result in the `processed_data` folder. 
-* The `analysis_code` folder contains several files that load the processed data, do an exploratory analysis, and fit a simple model. These files produce figures and some numeric output (tables), which are saved to the `results` folder.
-* The `products` folder contains an example `bibtex` and CSL style files for references. Those files are used by the example manuscript and slides.
-* The  `manuscript` folder contains a template for a report written as Quarto file. If you access this repository as part of [my Modern Applied Data Science course](https://andreashandel.github.io/MADAcourse/), the sections are guides for your project. If you found your way to this repository outside the course, you might only be interested in seeing how the file pulls in results and references and generates a word document as output, without paying attention to the detailed structure. There is also a sub-folder containing an example template for a supplementary material file.
-* The `slides` folder contains a basic example of slides made with Quarto. 
+To replicate or build upon the research, follow these steps:
 
+1. **Clone the Repository:**
+`git clone https://github.com/dlhogan97/Synoptic-Sublimation.git`
 
-# Getting started
+2. **Install Dependencies:**
+`.yml` file not yet created.
+ <!--file to create an environment which will install all necessary dependencies for this analysis.-->
 
-This is a Github template repository. The best way to get it and start using it is [by following these steps.](https://help.github.com/en/articles/creating-a-repository-from-a-template)
+3. **Data Preparation:**
+To be updated in the future.
+<!--All data can be downloaded from [![DOI](zenodo.10056373.svg)](https://zenodo.org/records/10056373)-->
 
-Once you got the repository, you can check out the examples by executing them in order. First run the processing code, which will produce the processed data. Then run the analysis scripts, which will take the processed data and produce some results. Then you can run the manuscript, poster and slides example files in any order. Those files pull in the generated results and display them. These files also pull in references from the `bibtex` file and format them according to the CSL style.
+4. **Run the Analysis:**
+To be updated in the future.
+<!--Navigate to the `notebooks` folder within `Upper_CO_Analysis`. A README is available within the `notebooks` folder to provide information about what each file is meant to do. Descriptions of each file are also available within the notebooks themselves. In summary, this folder contains a collection of Jupyter Notebooks, each serving a specific purpose in the analysis and development of products related to the study of the Upper Colorado River Basin (UCRB), PRISM data, Hydro-Climatic Data Network (HCDN), and associated investigations. Notebooks are categorized into numbered analysis files (e.g., `01_UCRB_exploratory_analysis_20230425.ipynb`) and development files (e.g., `dev_00_snowcourse_investigation.ipynb`). -->
 
+<!-- 
+5. **Citation:**
+If you use or build upon this research, please provide proper attribution and cite the original paper (citation to be updated upon publication). -->
+
+## License
+
+This repository is open-source and available under the MIT License. Please review the license for terms and conditions of use.
+
+## Contact
+
+If you have any questions or need further information, feel free to contact me at dlhogan@uw.edu.
 
