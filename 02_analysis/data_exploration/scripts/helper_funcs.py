@@ -54,7 +54,9 @@ TURBULENCE_VARIABLES = [
     'tc_20m_c',   'u_u__20m_c',   'v_v__20m_c',   'w_w__20m_c',   
         'u_w__20m_c',   'v_w__20m_c', 'u_tc__20m_c', 'v_tc__20m_c',  'u_h2o__20m_c', 'v_h2o__20m_c',  'w_tc__20m_c',  'w_h2o__20m_c',
 ]
-
+WATER_VAPOR_VARIABLES = [
+'h2o_1m_uw', 'h2o_3m_uw', 'h2o_10m_uw', 'h2o_1m_ue', 'h2o_3m_ue', 'h2o_10m_ue', 'h2o_1m_d', 'h2o_3m_d', 'h2o_10m_d', 'h2o_2m_c', 'h2o_3m_c', 'h2o_5m_c', 'h2o_10m_c', 'h2o_15m_c', 'h2o_20m_c'
+]
 TEMPERATURE_VARIABLES = [    
     # Temperature & Relative Humidity Array 
     'T_2m_c', 'T_3m_c', 'T_4m_c', 'T_5m_c', 'T_6m_c', 'T_7m_c', 'T_8m_c', 'T_9m_c', 'T_10m_c',
