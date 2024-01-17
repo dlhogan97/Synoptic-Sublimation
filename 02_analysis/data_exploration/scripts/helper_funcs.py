@@ -1,5 +1,9 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+from metpy.plots import SkewT, add_metpy_logo
+from metpy.units import units
+import metpy.calc as mcalc
 
 WIND_VARIABLES = [
 # Sonic Anemometer Data for 4 towers
@@ -19,6 +23,22 @@ WIND_VARIABLES = [
 'spd_15m_c',    'dir_15m_c',    'u_15m_c',  'v_15m_c',  'w_15m_c',
 'spd_20m_c',    'dir_20m_c',    'u_20m_c',  'v_20m_c',  'w_20m_c',
 ]
+COUNT_VARIABLES = ['counts_3m_c',
+ 'counts_3m_ue',
+ 'counts_1m_d',
+ 'counts_15m_c',
+ 'counts_10m_uw',
+ 'counts_1m_ue',
+ 'counts_20m_c',
+ 'counts_2m_c',
+ 'counts_10m_ue',
+ 'counts_1m_c',
+ 'counts_1m_uw',
+ 'counts_3m_uw',
+ 'counts_10m_c',
+ 'counts_3m_d',
+ 'counts_5m_c',
+ 'counts_10m_d']
 TURBULENCE_VARIABLES = [
     'tc_1m_uw',        'u_u__1m_uw',    'v_v__1m_uw',    'w_w__1m_uw',    
         'u_w__1m_uw',    'v_w__1m_uw',  'u_tc__1m_uw',  'v_tc__1m_uw',   'u_h2o__1m_uw',  'v_h2o__1m_uw',   'w_tc__1m_uw',   'w_h2o__1m_uw',
@@ -108,3 +128,184 @@ def create_windrose_df(df, wind_dir_var, wind_spd_var):
     # divide frequency by the total sum as a percentage
     windrose_df['frequency'] = 100*windrose_df['frequency']/windrose_df['frequency'].sum() 
     return windrose_df
+
+def simple_sounding(ds):
+    """
+    This function takes in a dataset and plots a skew-t diagram with the radiosonde data
+    Inputs:
+        ds: xarray dataset
+    Outputs:
+        fig: matplotlib figure
+    """
+    # get the first time index and save as a string with format YYYY-MM-DD HH:MM
+    time = pd.to_datetime(ds['time'].values[0]).strftime('%Y-%m-%d %H:%M')
+    # check if tdew a variable in the dataset
+    if 'tdew' not in ds:
+        # if not, calculate it
+        ds['tdew'] = mcalc.dewpoint_from_relative_humidity(ds['tdry'],ds['rh'])
+    # get index for values of p > 200
+    ix = np.where(ds['pres'].values > 200)[0]
+    p = ds['pres'].values[ix] * units.hPa
+    T = ds['tdry'].values[ix] * units.degC
+    Td = ds['tdew'].values[ix] * units.degC
+    u = ds['u_wind'].values[ix] * units('m/s')
+    v = ds['v_wind'].values[ix] * units('m/s')
+    # find the pressures where T is between -12 and -18
+    ix_dgz = np.where((T > -18 * units.degC) & (T < -12 * units.degC))[0]
+    fig = plt.figure(figsize=(8, 12))
+    # increase whitespace at the bottom of the plot
+    fig.subplots_adjust(bottom=0.2)
+    # Example of defining your own vertical barb spacing
+    skew = SkewT(fig, aspect=100)
+
+    # Plot the data using normal plotting functions, in this case using
+    # log scaling in Y, as dictated by the typical meteorological plot
+    temp = skew.plot(p, T, 'r', label='Temperature')
+    tdew = skew.plot(p, Td, 'g', label='Dew Point')
+    # change the color and linestyle of the grid lines
+    isotherm=skew.ax.grid(True, which='major', axis='both', color='white', linestyle='-', linewidth=1, alpha=0.5,label='Isotherms')
+    # Set some better labels than the default
+    skew.ax.set_xlabel('Temperature (\N{DEGREE CELSIUS})')
+    skew.ax.set_ylabel('Pressure (mb)')
+
+    # Set spacing interval--Every 50 mb from 1000 to 100 mb
+    my_interval = np.arange(200, 720, 50) * units('mbar')
+
+    # Get indexes of values closest to defined interval
+    ix = mcalc.resample_nn_1d(p, my_interval)
+
+    # Plot only values nearest to defined interval values
+    barbs = skew.plot_barbs(p[ix], u[ix], v[ix], color='white')
+
+    # Add the relevant special lines
+    dry_adiabats = skew.plot_dry_adiabats(colors='red',alpha=0.5, linestyle='-', label='Dry Adiabats')
+    moist_adiabats = skew.plot_moist_adiabats(colors='blue', alpha=0.75, linestyle='-', label='Moist Adiabats')
+    mixing_ratios = skew.plot_mixing_lines(colors='grey',alpha=0.5, label='Mixing Ratio')
+    skew.ax.set_ylim(p[0], 200)
+
+    # plot a yellow line at the top and bottom of the dgz only on the left 0.25 of the plot
+    skew.ax.axhline(y=p[ix_dgz[0]], color='yellow', linestyle='--', alpha=0.5, xmin=0, xmax=0.25)
+    skew.ax.axhline(y=p[ix_dgz[-1]], color='yellow', linestyle='--', alpha=0.5, xmin=0, xmax=0.25)
+    # label the zone DGZ
+    skew.ax.text(T.min().magnitude-5, p[ix_dgz[0]].magnitude-30, 'DGZ', color='yellow', alpha=0.5)
+
+    # set xaxis values to between min and max values + 10
+    skew.ax.set_xlim(T.min().magnitude - 10, T.max().magnitude + 10)
+
+    # make the outline of the figure white
+    skew.ax.spines['top'].set_color('white')
+    skew.ax.spines['left'].set_color('white')
+    skew.ax.spines['right'].set_color('white')
+    skew.ax.spines['bottom'].set_color('white') 
+    # make the background color black
+    skew.ax.set_facecolor('black')
+    # make the whole figure black
+    fig.patch.set_facecolor('black')
+    # make xaxis ticks, labels, and ticklabels white
+    skew.ax.xaxis.set_tick_params(color='white')
+    skew.ax.xaxis.label.set_color('white')
+    skew.ax.tick_params(axis='x', colors='white')
+    # make yaxis ticks, labels, and ticklabels white
+    skew.ax.yaxis.set_tick_params(color='white')
+    skew.ax.yaxis.label.set_color('white')
+    skew.ax.tick_params(axis='y', colors='white')
+    # make the title white
+    skew.ax.set_title(f'Radiosonde Sounding for {time} UTC', color='white')
+    # add legend outside the plot on the right
+    h, l = skew.ax.get_legend_handles_labels()
+    
+    skew.ax.legend(
+                   loc='center left', bbox_to_anchor=(1.05, 0.5),
+                   facecolor='black', labelcolor='white')
+    # add metpy logo as an inset to the bottom left corner
+    logo_fig= plt.gcf()
+    add_metpy_logo(logo_fig, 750, -p.max().magnitude+1100, size='small', zorder=0)
+    return fig
+
+def mean_sounding(df_mean, title):
+    """
+    This function takes in a dataframe of mean u,v wind components, mean temperature, mean dewpoint, and mean pressure at 10 mb intervals
+    and plots a skew-t diagram with the mean radiosonde data.
+    Inputs:
+        df_mean: pandas dataframe
+        title: string of the title for the plot
+    Outputs:
+        fig: matplotlib figure
+    """
+    # get the mean values
+    p = df_mean['pres'].values * units.hPa
+    T = df_mean['tdry'].values * units.degC
+    Td = df_mean['tdew'].values * units.degC
+    u = df_mean['u_wind'].values * units('m/s')
+    v = df_mean['v_wind'].values * units('m/s')
+    # find the pressures where T is between -12 and -18
+    ix_dgz = np.where((T > -18 * units.degC) & (T < -12 * units.degC))[0]
+    fig = plt.figure(figsize=(8, 12))
+    # increase whitespace at the bottom of the plot
+    fig.subplots_adjust(bottom=0.2)
+    # Example of defining your own vertical barb spacing
+    skew = SkewT(fig, aspect=100)
+
+    # Plot the data using normal plotting functions, in this case using
+    # log scaling in Y, as dictated by the typical meteorological plot
+    temp = skew.plot(p, T, 'r', label='Temperature')
+    tdew = skew.plot(p, Td, 'g', label='Dew Point')
+    # change the color and linestyle of the grid lines
+    isotherm=skew.ax.grid(True, which='major', axis='both', color='white', linestyle='-', linewidth=1, alpha=0.5,label='Isotherms')
+    # Set some better labels than the default
+    skew.ax.set_xlabel('Temperature (\N{DEGREE CELSIUS})')
+    skew.ax.set_ylabel('Pressure (mb)')
+
+    # Set spacing interval--Every 50 mb from 1000 to 100 mb
+    my_interval = np.arange(200, 720, 50) * units('mbar')
+
+    # Get indexes of values closest to defined interval
+    ix = mcalc.resample_nn_1d(p, my_interval)
+
+    # Plot only values nearest to defined interval values
+    barbs = skew.plot_barbs(p[::5], u[::5], v[::5], color='white')
+
+    # Add the relevant special lines
+    dry_adiabats = skew.plot_dry_adiabats(colors='red',alpha=0.5, linestyle='-', label='Dry Adiabats')
+    moist_adiabats = skew.plot_moist_adiabats(colors='blue', alpha=0.75, linestyle='-', label='Moist Adiabats')
+    mixing_ratios = skew.plot_mixing_lines(colors='grey',alpha=0.5, label='Mixing Ratio')
+    skew.ax.set_ylim(p[0], 200)
+
+    # plot a yellow line at the top and bottom of the dgz only on the left 0.25 of the plot
+    skew.ax.axhline(y=p[ix_dgz[0]], color='yellow', linestyle='--', alpha=0.5, xmin=0, xmax=0.25)
+    skew.ax.axhline(y=p[ix_dgz[-1]], color='yellow', linestyle='--', alpha=0.5, xmin=0, xmax=0.25)
+    # label the zone DGZ
+    skew.ax.text(T.min().magnitude-5, p[ix_dgz[0]].magnitude-30, 'DGZ', color='yellow', alpha=0.5)
+
+    # set xaxis values to between min and max values + 10
+    skew.ax.set_xlim(T.min().magnitude - 10, T.max().magnitude + 10)
+
+    # make the outline of the figure white
+    skew.ax.spines['top'].set_color('white')
+    skew.ax.spines['left'].set_color('white')
+    skew.ax.spines['right'].set_color('white')
+    skew.ax.spines['bottom'].set_color('white') 
+    # make the background color black
+    skew.ax.set_facecolor('black')
+    # make the whole figure black
+    fig.patch.set_facecolor('black')
+    # make xaxis ticks, labels, and ticklabels white
+    skew.ax.xaxis.set_tick_params(color='white')
+    skew.ax.xaxis.label.set_color('white')
+    skew.ax.tick_params(axis='x', colors='white')
+    # make yaxis ticks, labels, and ticklabels white
+    skew.ax.yaxis.set_tick_params(color='white')
+    skew.ax.yaxis.label.set_color('white')
+    skew.ax.tick_params(axis='y', colors='white')
+    # make the title white
+    skew.ax.set_title(title, color='white')
+    # add legend outside the plot on the right
+    h, l = skew.ax.get_legend_handles_labels()
+    
+    skew.ax.legend(
+                   loc='center left', bbox_to_anchor=(1.05, 0.5),
+                   facecolor='black', labelcolor='white')
+    # add metpy logo as an inset to the bottom left corner
+    logo_fig= plt.gcf()
+    add_metpy_logo(logo_fig, 750, -p.max().magnitude+1100, size='small', zorder=0)
+    return 
