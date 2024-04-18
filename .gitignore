@@ -12,3 +12,5 @@
 /cache/
 *.pyc
 
+01_data/get_data/metloom_data/cache/aiohttp_cache.sqlite
+02_analysis/data_exploration/cache/aiohttp_cache.sqlite

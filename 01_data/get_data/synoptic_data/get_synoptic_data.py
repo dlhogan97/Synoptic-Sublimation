@@ -63,6 +63,7 @@ if __name__ == "__main__":
 
     # drop variables that are not in the check_variables list
     variables = [variable for variable in variables if variable in check_variables]
+    print(variables)
     start = input("Enter start date (YYYY-MM-DD): ")
     end = input("Enter end date (YYYY-MM-DD): ")
     # convert start and end to datetime objects
