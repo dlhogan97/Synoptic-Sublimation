@@ -309,3 +309,30 @@ def mean_sounding(df_mean, title):
     logo_fig= plt.gcf()
     add_metpy_logo(logo_fig, 750, -p.max().magnitude+1100, size='small', zorder=0)
     return 
+
+def adjust_wdir(df):
+    """
+    This function takes in a dataframe and calculates the wind direction from the u and v wind components
+    Inputs:
+        df: pandas dataframe
+    Outputs:
+        df: pandas dataframe with the wind direction calculated
+    """
+    # get all the variables with 'dir' in the name
+    
+    dir_vars = df.filter(regex='dir_*').columns
+    if len(dir_vars) == 0:
+        print('No wind direction variables found')
+        return
+    else:
+        # for each u_* and v_* variable, calculate the wind direction
+        for dir_var in dir_vars:
+            # for the column, extract everything after the first underscore
+            loc = dir_var.split('_', 1)[1]
+            u_loc = 'u_' + loc
+            v_loc = 'v_' + loc
+            # create a column with the wind direction
+            df[dir_var] = np.arctan2(df[v_loc], df[u_loc]) * 180 / np.pi
+            # convert wind direction to compass direction
+            df[dir_var] = (270 - df[dir_var]) % 360
+        return df
