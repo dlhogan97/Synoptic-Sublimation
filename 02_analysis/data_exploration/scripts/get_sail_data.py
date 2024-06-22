@@ -62,7 +62,7 @@ def date_parser(date_string, output_format='%Y%m%d', return_datetime=False):
     raise ValueError('Invalid Date format, please use one of these formats ' + fmt_strings)
 
 
-def get_sail_data(username, token, datastream, startdate, enddate, time=None):
+def get_sail_data(username, token, datastream, startdate, enddate, time=None, resample=None):
     """
     *** This tool was adapted from the ARM Atmospheric Data Community Toolkit ***
 
@@ -177,8 +177,13 @@ def get_sail_data(username, token, datastream, startdate, enddate, time=None):
             ).format(':'.join([username, token]), fname)
             if i == 0:
                 ds = nc.open_data(save_data_url).to_xarray()
+                if resample:
+                    ds = ds.resample(time=resample).mean()
+                    print("Resampling data...")
             else: 
                 tmp = nc.open_data(save_data_url).to_xarray()
+                if resample:
+                    tmp = tmp.resample(time=resample).mean()
                 ds = xr.concat([ds,tmp], dim='time').sortby('time')
         return ds
     else:
