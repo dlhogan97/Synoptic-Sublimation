@@ -181,10 +181,14 @@ def get_sail_data(username, token, datastream, startdate, enddate, time=None, re
                     ds = ds.resample(time=resample).mean()
                     print("Resampling data...")
             else: 
-                tmp = nc.open_data(save_data_url).to_xarray()
-                if resample:
-                    tmp = tmp.resample(time=resample).mean()
-                ds = xr.concat([ds,tmp], dim='time').sortby('time')
+                try:
+                    tmp = nc.open_data(save_data_url).to_xarray()
+                    if resample:
+                        tmp = tmp.resample(time=resample).mean()
+                    ds = xr.concat([ds,tmp], dim='time').sortby('time')
+                except:
+                    print(f'Error downloading {fname}')
+                    continue
         return ds
     else:
         print(
