@@ -178,8 +178,12 @@ def get_sail_data(username, token, datastream, startdate, enddate, time=None):
             if i == 0:
                 ds = nc.open_data(save_data_url).to_xarray()
             else: 
-                tmp = nc.open_data(save_data_url).to_xarray()
-                ds = xr.concat([ds,tmp], dim='time').sortby('time')
+                try:
+                    tmp = nc.open_data(save_data_url).to_xarray()
+                    ds = xr.concat([ds,tmp], dim='time').sortby('time')
+                except:
+                    print(f'Error downloading {fname}')
+                    continue
         return ds
     else:
         print(
