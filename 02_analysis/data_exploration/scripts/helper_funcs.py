@@ -94,6 +94,9 @@ SNOW_FLUX = [
     # Blowing snow/FlowCapt Sensors
     'SF_avg_1m_ue', 'SF_avg_2m_ue',
 ]
+RADIAION_VARIABLES = [
+    'Rpile_out_9m_d', 'Rpile_in_9m_d', 'Rsw_in_9m_d', 'Rsw_out_9m_d'
+]
 # create a function to setup a dataframe for a windrose plot in plotly
 def create_windrose_df(df, wind_dir_var, wind_spd_var):
     """
