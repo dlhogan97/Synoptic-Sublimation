@@ -1,0 +1,13 @@
+{
+    "python.defaultInterpreterPath": "/home/dlhogan/miniforge3",
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ],
+    "files.autoSave": "afterDelay",
+    "python.createEnvironment.contentButton": "show",
+    "jupyter.notebookFileRoot": "${workspaceFolder} OR ${fileDirname}",
+    "jupyter.jupyterCommandLineArguments": [
+
+    ],
+}

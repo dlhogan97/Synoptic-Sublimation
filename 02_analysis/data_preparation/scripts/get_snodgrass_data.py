@@ -65,10 +65,10 @@ def meta_to_gdf(meta_dict):
 def get_snodgrass_metadata():
     meta_dict = {}
     # filenames for the open and forest sites
-    open_site_datafile = '../../../01_data/raw_data/station_data/SND_opn_AWS_data_001hr.csv'
-    open_site_metafile = '../../../01_data/raw_data/station_data/SND_opn_AWS_data_meta.txt'
-    forest_site_datafile = '../../../01_data/raw_data/station_data/SND_for_AWS_data_001hr.csv'
-    forest_site_metafile = '../../../01_data/raw_data/station_data/SND_for_AWS_data_meta.txt'
+    open_site_datafile = '.././01_data/raw_data/station_data/SND_opn_AWS_data_001hr.csv'
+    open_site_metafile = '.././01_data/raw_data/station_data/SND_opn_AWS_data_meta.txt'
+    forest_site_datafile = '.././01_data/raw_data/station_data/SND_for_AWS_data_001hr.csv'
+    forest_site_metafile = '.././01_data/raw_data/station_data/SND_for_AWS_data_meta.txt'
     # get metadate, columns, and site name
     for name,meta in zip([open_site_datafile, forest_site_datafile], [open_site_metafile, forest_site_metafile]):
         # get the meta dict from get_snodgrass_data
@@ -80,17 +80,17 @@ def get_snodgrass_metadata():
 # %%
 if __name__ == '__main__':
     # Read in the opn site data
-    open_site_datafile = '../../../01_data/raw_data/station_data/SND_opn_AWS_data_001hr.csv'
-    open_site_metafile = '../../../01_data/raw_data/station_data/SND_opn_AWS_data_meta.txt'
+    open_site_datafile = '.././01_data/raw_data/station_data/SND_opn_AWS_data_001hr.csv'
+    open_site_metafile = '.././01_data/raw_data/station_data/SND_opn_AWS_data_meta.txt'
     open_site_data = get_snodgrass_data(open_site_datafile,open_site_metafile)
 
-    forest_site_datafile = '../../../01_data/raw_data/station_data/SND_for_AWS_data_001hr.csv'
-    forest_site_metafile = '../../../01_data/raw_data/station_data/SND_for_AWS_data_meta.txt'
+    forest_site_datafile = '.././01_data/raw_data/station_data/SND_for_AWS_data_001hr.csv'
+    forest_site_metafile = '.././01_data/raw_data/station_data/SND_for_AWS_data_meta.txt'
     forest_site_data = get_snodgrass_data(forest_site_datafile,forest_site_metafile)
     metadata_gdf = get_snodgrass_metadata()
 
     # save the data
-    open_site_data.to_csv('../../../01_data/processed_data/snodgrass_open_site_data_processed.csv')
-    forest_site_data.to_csv('../../../01_data/processed_data/snodgrass_forest_site_data_processed.csv')
-    metadata_gdf.to_file('../../../01_data/processed_data/snodgrass_metadata_processed.geojson', driver='GeoJSON')
+    open_site_data.to_csv('.././01_data/processed_data/snodgrass_open_site_data_processed.csv')
+    forest_site_data.to_csv('.././01_data/processed_data/snodgrass_forest_site_data_processed.csv')
+    metadata_gdf.to_file('.././01_data/processed_data/snodgrass_metadata_processed.geojson', driver='GeoJSON')
 # %%
