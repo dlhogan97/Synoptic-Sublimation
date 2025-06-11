@@ -1,0 +1,9 @@
+run_description,model_type,f1_score,n_estimators,max_depth,min_samples_split,min_samples_leaf,max_features
+"Random Forest with 10x10 areal average, after adding advection terms",Areal Average,0.4119813838517972,30,15,,,4
+"Random Forest with 10x10 areal average, after adding advection terms",Areal Average,0.5512672110498198,30,15,,,4
+"Random Forest with 10x10 areal average, checking other params",Areal Average,0.5512672110498198,,,2,2,
+"Random Forest with 10x10 areal average, switchted to 0.1 test",Areal Average,0.559707037123055,10,15,,,5
+"Random Forest with 10x10 areal average, switchted to 0.1 test",Areal Average,0.559707037123055,10,15,,,5
+"Random Forest with 10x10 areal average, switchted to 0.2 test set",Areal Average,0.5512672110498198,,,2,2,
+"Random Forest with 10x10 areal average, switchted to 0.2 test set",Areal Average,0.5512672110498198,30,15,2,2,4
+"""Random Forest with single grid cell, 0.2 test set, gridsearch""",Areal Average,0.5141885650581302,20,15,2,2,5

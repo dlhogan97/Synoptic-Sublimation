@@ -1,0 +1,9 @@
+run_description,model_type,f1_score,n_estimators,learning_rate,max_depth,scale_pos_weight,subsample,min_samples_split,min_samples_leaf,max_features
+XGBoost with 0.2 subsample and fit.,5-Grid Average,0.5907280847774671,,0.7,5,,0.9,,,
+XGBoost with 0.2 subsample and fit.,5-Grid Average,0.5907280847774671,30,0.7,5,50,0.9,,,
+changing to check n_estimator and scale_pos_weight,5-Grid Average,0.6047223260232208,30,0.3,7,20,0.9,,,
+checking other params again.,5-Grid Average,0.6047223260232208,30,0.3,7,20,0.9,,,
+"XGBoost, single grid cell, 0.2 testing set",5-Grid Average,0.573680646956509,30,0.3,7,5,0.9,,,
+testing with n_estimators,5-Grid Average,0.5798279039505063,40,0.2,7,20,0.5,,,
+testing n_estimators,closest point,0.5546402058832671,30,0.3,7,20,0.9,,,
+"testing lr, spw, and subsample",closest point,0.573680646956509,30,0.3,7,5,0.9,,,
