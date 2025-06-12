@@ -1,0 +1,67 @@
+# Changed to 0.8/0.2 train-test split
+2025-06-12 16:00:00,179 - Best Parameters (Optuna): {'max_depth': 5, 'learning_rate': 0.2644212911092845, 'n_estimators': 84, 'subsample': 0.7049638739891072, 'colsample_bytree': 0.6102131843312785, 'gamma': 1.2352572425509498, 'reg_alpha': 0.836938833703733, 'reg_lambda': 0.26022108105834946}
+2025-06-12 16:00:00,179 - Best Cross-Validation F1 Score (Optuna): 0.5371
+2025-06-12 16:00:00,202 - Model: XGBoost
+2025-06-12 16:00:00,202 - F1 Score: 0.5600
+2025-06-12 16:00:00,202 - Average Precision: 0.6189
+2025-06-12 16:00:00,202 - Baseline Precision: 0.0876
+2025-06-12 16:00:00,202 - ROC AUC: 0.8891
+2025-06-12 16:00:33,227 - Best Parameters (Optuna): {'C': 21.368473660050626, 'penalty': 'l1'}
+2025-06-12 16:00:33,227 - Best Cross-Validation F1 Score (Optuna): 0.4039
+2025-06-12 16:00:33,235 - Model: Logistic Regression
+2025-06-12 16:00:33,235 - F1 Score: 0.5385
+2025-06-12 16:00:33,236 - Average Precision: 0.5802
+2025-06-12 16:00:33,236 - Baseline Precision: 0.0876
+2025-06-12 16:00:33,236 - ROC AUC: 0.8545
+2025-06-12 16:01:14,974 - Best Parameters (Optuna): {'n_estimators': 23, 'max_depth': 15, 'min_samples_split': 16, 'min_samples_leaf': 2, 'max_features': None}
+2025-06-12 16:01:14,974 - Best Cross-Validation F1 Score (Optuna): 0.5131
+2025-06-12 16:01:15,034 - Model: Random Forest
+2025-06-12 16:01:15,034 - F1 Score: 0.5926
+2025-06-12 16:01:15,034 - Average Precision: 0.5990
+2025-06-12 16:01:15,034 - Baseline Precision: 0.0876
+2025-06-12 16:01:15,034 - ROC AUC: 0.8600
+
+# Changed to 0.9/0.1 train-test split
+2025-06-12 16:05:51,597 - Best Parameters (Optuna): {'max_depth': 9, 'learning_rate': 0.11186073187467067, 'n_estimators': 48, 'subsample': 0.573307079164074, 'scale_pos_weight': 6.79199605792656, 'colsample_bytree': 0.7036855349764104, 'gamma': 0.3696844742506049, 'reg_alpha': 0.21850368730579786, 'reg_lambda': 0.24094293083371296}
+2025-06-12 16:05:51,597 - Best Cross-Validation F1 Score (Optuna): 0.5623
+2025-06-12 16:05:51,612 - Model: XGBoost
+2025-06-12 16:05:51,612 - F1 Score: 0.6154
+2025-06-12 16:05:51,612 - Average Precision: 0.6572
+2025-06-12 16:05:51,612 - Baseline Precision: 0.0825
+2025-06-12 16:05:51,612 - ROC AUC: 0.9357
+2025-06-12 16:06:05,803 - Best Parameters (Optuna): {'C': 22.247314686723172, 'penalty': 'l2'}
+2025-06-12 16:06:05,803 - Best Cross-Validation F1 Score (Optuna): 0.4135
+2025-06-12 16:06:05,820 - Model: Logistic Regression
+2025-06-12 16:06:05,821 - F1 Score: 0.6154
+2025-06-12 16:06:05,821 - Average Precision: 0.6849
+2025-06-12 16:06:05,821 - Baseline Precision: 0.0825
+2025-06-12 16:06:05,821 - ROC AUC: 0.9087
+2025-06-12 16:06:47,151 - Best Parameters (Optuna): {'n_estimators': 17, 'max_depth': 15, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2'}
+2025-06-12 16:06:47,152 - Best Cross-Validation F1 Score (Optuna): 0.5172
+2025-06-12 16:06:47,199 - Model: Random Forest
+2025-06-12 16:06:47,199 - F1 Score: 0.6452
+2025-06-12 16:06:47,199 - Average Precision: 0.6447
+2025-06-12 16:06:47,199 - Baseline Precision: 0.0825
+2025-06-12 16:06:47,199 - ROC AUC: 0.9277
+
+# Changed to 5x5 dataset2025-06-12 16:09:39,859 - Best Parameters (Optuna): {'max_depth': 6, 'learning_rate': 0.3287972364485231, 'n_estimators': 91, 'subsample': 0.6776723288600726, 'scale_pos_weight': 5.523741086651496, 'colsample_bytree': 0.6858617076454239, 'gamma': 0.3804538854911426, 'reg_alpha': 0.42237180835825705, 'reg_lambda': 0.8121148908543029}
+2025-06-12 16:09:39,860 - Best Cross-Validation F1 Score (Optuna): 0.5946
+2025-06-12 16:09:39,874 - Model: XGBoost
+2025-06-12 16:09:39,874 - F1 Score: 0.6154
+2025-06-12 16:09:39,874 - Average Precision: 0.7002
+2025-06-12 16:09:39,874 - Baseline Precision: 0.0825
+2025-06-12 16:09:39,874 - ROC AUC: 0.9505
+2025-06-12 16:09:53,818 - Best Parameters (Optuna): {'C': 0.43382044788839447, 'penalty': 'l2'}
+2025-06-12 16:09:53,818 - Best Cross-Validation F1 Score (Optuna): 0.4181
+2025-06-12 16:09:53,834 - Model: Logistic Regression
+2025-06-12 16:09:53,835 - F1 Score: 0.5385
+2025-06-12 16:09:53,835 - Average Precision: 0.7138
+2025-06-12 16:09:53,835 - Baseline Precision: 0.0825
+2025-06-12 16:09:53,835 - ROC AUC: 0.9147
+2025-06-12 16:10:57,035 - Best Parameters (Optuna): {'n_estimators': 75, 'max_depth': 14, 'min_samples_split': 10, 'min_samples_leaf': 2, 'max_features': 4}
+2025-06-12 16:10:57,035 - Best Cross-Validation F1 Score (Optuna): 0.5259
+2025-06-12 16:10:57,105 - Model: Random Forest
+2025-06-12 16:10:57,105 - F1 Score: 0.6429
+2025-06-12 16:10:57,106 - Average Precision: 0.6916
+2025-06-12 16:10:57,106 - Baseline Precision: 0.0825
+2025-06-12 16:10:57,106 - ROC AUC: 0.9245
