@@ -44,7 +44,8 @@
 2025-06-12 16:06:47,199 - Baseline Precision: 0.0825
 2025-06-12 16:06:47,199 - ROC AUC: 0.9277
 
-# Changed to 5x5 dataset2025-06-12 16:09:39,859 - Best Parameters (Optuna): {'max_depth': 6, 'learning_rate': 0.3287972364485231, 'n_estimators': 91, 'subsample': 0.6776723288600726, 'scale_pos_weight': 5.523741086651496, 'colsample_bytree': 0.6858617076454239, 'gamma': 0.3804538854911426, 'reg_alpha': 0.42237180835825705, 'reg_lambda': 0.8121148908543029}
+# Changed to 5x5 dataset
+2025-06-12 16:09:39,859 - Best Parameters (Optuna): {'max_depth': 6, 'learning_rate': 0.3287972364485231, 'n_estimators': 91, 'subsample': 0.6776723288600726, 'scale_pos_weight': 5.523741086651496, 'colsample_bytree': 0.6858617076454239, 'gamma': 0.3804538854911426, 'reg_alpha': 0.42237180835825705, 'reg_lambda': 0.8121148908543029}
 2025-06-12 16:09:39,860 - Best Cross-Validation F1 Score (Optuna): 0.5946
 2025-06-12 16:09:39,874 - Model: XGBoost
 2025-06-12 16:09:39,874 - F1 Score: 0.6154
@@ -65,3 +66,105 @@
 2025-06-12 16:10:57,106 - Average Precision: 0.6916
 2025-06-12 16:10:57,106 - Baseline Precision: 0.0825
 2025-06-12 16:10:57,106 - ROC AUC: 0.9245
+
+# Changed to 10x10 dataset
+2025-06-13 14:32:36,697 - Best params (Optuna): {'C': 7.346586108675128}
+2025-06-13 14:32:36,697 - Best CV F1 (Optuna): 0.3292
+2025-06-13 14:32:36,722 - Logistic Regression (Single) | F1: 0.4675  AP: 0.5791  ROC‑AUC: 0.8209
+2025-06-13 14:33:28,484 - Best params (Optuna): {'C': 0.08284442077113635}
+2025-06-13 14:33:28,484 - Best CV F1 (Optuna): 0.4580
+2025-06-13 14:33:28,585 - Logistic Regression | F1: 0.5479  AP: 0.6276  ROC‑AUC: 0.8644
+2025-06-13 14:34:06,726 - Best params (Optuna): {'n_estimators': 103, 'max_depth': 15, 'min_samples_split': 8, 'min_samples_leaf': 1, 'max_features': 4}
+2025-06-13 14:34:06,726 - Best CV F1 (Optuna): 0.5385
+2025-06-13 14:34:07,345 - Random Forest | F1: 0.5854  AP: 0.7408  ROC‑AUC: 0.9318
+2025-06-13 14:34:56,972 - Best params (Optuna): {'max_depth': 6, 'learning_rate': 0.11483457172157868, 'n_estimators': 127, 'subsample': 0.9250144693067383, 'colsample_bytree': 0.7712110124279898, 'scale_pos_weight': 8.893156628847267, 'reg_alpha': 0.4254910148662459, 'reg_lambda': 0.5370674064383636}
+2025-06-13 14:34:56,972 - Best CV F1 (Optuna): 0.6237
+2025-06-13 14:35:44,234 - XGBoost | F1: 0.6667  AP: 0.7695  ROC‑AUC: 0.9545
+
+# Changed to 15x15 dataset
+
+2025-06-13 14:37:29,984 - Best params (Optuna): {'C': 0.12178334260996798}
+2025-06-13 14:37:29,984 - Best CV F1 (Optuna): 0.3395
+2025-06-13 14:37:29,998 - Logistic Regression (Single) | F1: 0.4533  AP: 0.5891  ROC‑AUC: 0.8174
+2025-06-13 14:37:34,809 - Best params (Optuna): {'C': 10.739865276970077}
+2025-06-13 14:37:34,809 - Best CV F1 (Optuna): 0.4714
+2025-06-13 14:37:34,854 - Logistic Regression | F1: 0.5278  AP: 0.6477  ROC‑AUC: 0.8677
+2025-06-13 14:38:11,980 - Best params (Optuna): {'n_estimators': 83, 'max_depth': 13, 'min_samples_split': 3, 'min_samples_leaf': 1, 'max_features': 3}
+2025-06-13 14:38:11,980 - Best CV F1 (Optuna): 0.5342
+2025-06-13 14:38:12,364 - Random Forest | F1: 0.5641  AP: 0.7668  ROC‑AUC: 0.9308
+2025-06-13 14:39:41,421 - Best params (Optuna): {'max_depth': 7, 'learning_rate': 0.048182027060882766, 'n_estimators': 127, 'subsample': 0.8133908847589875, 'colsample_bytree': 0.83614469815802, 'scale_pos_weight': 14.895774039761672, 'reg_alpha': 0.249571570502354, 'reg_lambda': 1.5842584361146428}
+2025-06-13 14:39:41,421 - Best CV F1 (Optuna): 0.6530
+2025-06-13 14:40:29,304 - XGBoost | F1: 0.6538  AP: 0.7602  ROC‑AUC: 0.9424
+
+# Trying the 5x5 dataset again
+
+2025-06-13 14:41:44,392 - Best params (Optuna): {'C': 0.2363483738761018}
+2025-06-13 14:41:44,393 - Best CV F1 (Optuna): 0.2688
+2025-06-13 14:41:44,406 - Logistic Regression (Single) | F1: 0.4416  AP: 0.5376  ROC‑AUC: 0.8068
+2025-06-13 14:41:50,831 - Best params (Optuna): {'C': 35.32721674092029}
+2025-06-13 14:41:50,831 - Best CV F1 (Optuna): 0.4625
+2025-06-13 14:41:50,876 - Logistic Regression | F1: 0.5063  AP: 0.5901  ROC‑AUC: 0.8581
+2025-06-13 14:42:26,725 - Best params (Optuna): {'n_estimators': 83, 'max_depth': 15, 'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 4}
+2025-06-13 14:42:26,725 - Best CV F1 (Optuna): 0.5444
+2025-06-13 14:42:27,227 - Random Forest | F1: 0.5263  AP: 0.6843  ROC‑AUC: 0.9011
+2025-06-13 14:43:17,639 - Best params (Optuna): {'max_depth': 6, 'learning_rate': 0.11505944551636764, 'n_estimators': 105, 'subsample': 0.6073230233171598, 'colsample_bytree': 0.7471713215640623, 'scale_pos_weight': 13.482755893106619, 'reg_alpha': 0.21677297293888778, 'reg_lambda': 1.7926610946168426}
+2025-06-13 14:43:17,639 - Best CV F1 (Optuna): 0.6068
+2025-06-13 14:44:03,512 - XGBoost | F1: 0.6522  AP: 0.7041  ROC‑AUC: 0.9182
+
+# Trying the single grid point model again
+
+2025-06-13 14:46:19,237 - Best params (Optuna): {'C': 18.8540760487868}
+2025-06-13 14:46:19,237 - Best CV F1 (Optuna): 0.2688
+2025-06-13 14:46:19,257 - Logistic Regression (Single) | F1: 0.4416  AP: 0.5376  ROC‑AUC: 0.8068
+2025-06-13 14:46:38,489 - Best params (Optuna): {'C': 0.3874085986949562}
+2025-06-13 14:46:38,489 - Best CV F1 (Optuna): 0.4424
+2025-06-13 14:46:38,545 - Logistic Regression | F1: 0.5000  AP: 0.5919  ROC‑AUC: 0.8541
+2025-06-13 14:47:12,819 - Best params (Optuna): {'n_estimators': 111, 'max_depth': 13, 'min_samples_split': 7, 'min_samples_leaf': 1, 'max_features': 4}
+2025-06-13 14:47:12,819 - Best CV F1 (Optuna): 0.5221
+2025-06-13 14:47:13,779 - Random Forest | F1: 0.5000  AP: 0.6829  ROC‑AUC: 0.9248
+2025-06-13 14:48:13,102 - Best params (Optuna): {'max_depth': 8, 'learning_rate': 0.034777648417204515, 'n_estimators': 131, 'subsample': 0.6020574649158306, 'colsample_bytree': 0.9504862476697424, 'scale_pos_weight': 6.569229313308988, 'reg_alpha': 0.43778875484764945, 'reg_lambda': 0.9279911802847476}
+2025-06-13 14:48:13,102 - Best CV F1 (Optuna): 0.5725
+2025-06-13 14:48:58,605 - XGBoost | F1: 0.5581  AP: 0.6576  ROC‑AUC: 0.9102
+
+# Testing the 10x10 with a 0.8/0.2 split again
+2025-06-13 14:53:04,103 - Best params (Optuna): {'C': 0.02117638810705818}
+2025-06-13 14:53:04,103 - Best CV F1 (Optuna): 0.3160
+2025-06-13 14:53:04,129 - Logistic Regression (Single) | F1: 0.4354  AP: 0.5494  ROC‑AUC: 0.8336
+2025-06-13 14:53:14,598 - Best params (Optuna): {'C': 12.140571940630851}
+2025-06-13 14:53:14,598 - Best CV F1 (Optuna): 0.4597
+2025-06-13 14:53:14,640 - Logistic Regression | F1: 0.4832  AP: 0.6153  ROC‑AUC: 0.8776
+2025-06-13 14:53:49,136 - Best params (Optuna): {'n_estimators': 69, 'max_depth': 14, 'min_samples_split': 7, 'min_samples_leaf': 3, 'max_features': 4}
+2025-06-13 14:53:49,136 - Best CV F1 (Optuna): 0.5250
+2025-06-13 14:53:49,645 - Random Forest | F1: 0.5797  AP: 0.6770  ROC‑AUC: 0.9260
+2025-06-13 14:54:40,550 - Best params (Optuna): {'max_depth': 5, 'learning_rate': 0.17593992312238177, 'n_estimators': 112, 'subsample': 0.7590703681092608, 'colsample_bytree': 0.8813798370314776, 'scale_pos_weight': 10.341714531453064, 'reg_alpha': 0.47488114524778935, 'reg_lambda': 1.0186727724090914}
+2025-06-13 14:54:40,550 - Best CV F1 (Optuna): 0.6220
+2025-06-13 14:54:42,553 - XGBoost | F1: 0.5526  AP: 0.7018  ROC‑AUC: 0.9298
+
+# Testing the 10x10 with a 0.85/0.15 split again
+
+2025-06-13 14:56:41,535 - Best params (Optuna): {'C': 0.15610336337150937}
+2025-06-13 14:56:41,535 - Best CV F1 (Optuna): 0.3179
+2025-06-13 14:56:41,562 - Logistic Regression (Single) | F1: 0.4074  AP: 0.5533  ROC‑AUC: 0.8204
+2025-06-13 14:57:27,528 - Best params (Optuna): {'C': 0.7365921325683419}
+2025-06-13 14:57:27,529 - Best CV F1 (Optuna): 0.4738
+2025-06-13 14:57:27,568 - Logistic Regression | F1: 0.4902  AP: 0.5923  ROC‑AUC: 0.8749
+2025-06-13 14:57:59,938 - Best params (Optuna): {'n_estimators': 58, 'max_depth': 9, 'min_samples_split': 8, 'min_samples_leaf': 1, 'max_features': 'log2'}
+2025-06-13 14:57:59,938 - Best CV F1 (Optuna): 0.5058
+2025-06-13 14:58:00,361 - Random Forest | F1: 0.5965  AP: 0.6639  ROC‑AUC: 0.9210
+2025-06-13 14:58:52,466 - Best params (Optuna): {'max_depth': 6, 'learning_rate': 0.17362462270155743, 'n_estimators': 149, 'subsample': 0.6209855295629854, 'colsample_bytree': 0.8486570677297574, 'scale_pos_weight': 14.682532752323006, 'reg_alpha': 0.09486234540955052, 'reg_lambda': 1.5223633002379353}
+2025-06-13 14:58:52,466 - Best CV F1 (Optuna): 0.6219
+2025-06-13 14:58:57,164 - XGBoost | F1: 0.6182  AP: 0.6621  ROC‑AUC: 0.9342
+
+# Testing the 10x10 with a 0.9/0.1 split again
+2025-06-13 15:03:39,290 - Best params (Optuna): {'C': 29.756586869805815}
+2025-06-13 15:03:39,290 - Best CV F1 (Optuna): 0.3292
+2025-06-13 15:03:39,323 - Logistic Regression (Single) | F1: 0.4675  AP: 0.5791  ROC‑AUC: 0.8209
+2025-06-13 15:03:45,781 - Best params (Optuna): {'C': 0.34102057306888256}
+2025-06-13 15:03:45,781 - Best CV F1 (Optuna): 0.4579
+2025-06-13 15:03:45,845 - Logistic Regression | F1: 0.5556  AP: 0.6325  ROC‑AUC: 0.8669
+2025-06-13 15:04:19,125 - Best params (Optuna): {'n_estimators': 85, 'max_depth': 12, 'min_samples_split': 9, 'min_samples_leaf': 4, 'max_features': 4}
+2025-06-13 15:04:19,125 - Best CV F1 (Optuna): 0.5141
+2025-06-13 15:04:19,718 - Random Forest | F1: 0.6047  AP: 0.7483  ROC‑AUC: 0.9328
+2025-06-13 15:05:10,199 - Best params (Optuna): {'max_depth': 7, 'learning_rate': 0.12423212029228554, 'n_estimators': 112, 'subsample': 0.6431897522980754, 'colsample_bytree': 0.768549938469314, 'scale_pos_weight': 12.473610395363417, 'reg_alpha': 0.3993288070189938, 'reg_lambda': 1.3074883873836378}
+2025-06-13 15:05:10,200 - Best CV F1 (Optuna): 0.6408
+2025-06-13 15:05:17,069 - XGBoost | F1: 0.6512  AP: 0.6967  ROC‑AUC: 0.9273
