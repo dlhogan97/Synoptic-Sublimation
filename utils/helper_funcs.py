@@ -117,39 +117,94 @@ RADIAION_VARIABLES = [
     'Rpile_out_9m_d', 'Rpile_in_9m_d', 'Rsw_in_9m_d', 'Rsw_out_9m_d'
 ]
 # create a function to setup a dataframe for a windrose plot in plotly
-def create_windrose_df(df, wind_dir_var, wind_spd_var):
+def create_windrose_df(
+    df_or_speed,
+    wind_dir_var: str | None = "wind_dir",
+    wind_spd_var: str | None = "wind_spd",
+    *,
+    dir_bin_size: float = 22.5,               # degrees per sector (22.5 ° → 16‑point rose)
+    speed_bins: tuple | list = (0, 2, 4, 6, 8, 10, 12, 14, np.inf),
+    speed_labels: list | None = None,         # e.g. ["0–2", "2–4", …]  (optional)
+    drop_na: bool = True,
+) -> pd.DataFrame:
     """
-    This function takes in a dataframe and wind speed and direction variables and returns a dataframe with the wind speed binned by direction
-    Inputs:
-        df: pandas dataframe
-        wind_dir_var: string of the wind direction variable
-        wind_spd_var: string of the wind speed variable
-    Outputs:
-        windrose_df: pandas dataframe with the wind speed binned by direction
+    Return a tidy wind‑rose dataframe with one row per (direction sector, speed bin).
+
+    Parameters
+    ----------
+    df_or_speed : pandas.DataFrame | array‑like
+        Either a DataFrame containing *wind_dir_var* and *wind_spd_var* columns
+        **or** any array‑like of speeds (if so, *wind_dir_var*/*wind_spd_var*
+        are ignored and you must pass both `speed` and `direction` separately).
+    wind_dir_var, wind_spd_var : str, optional
+        Column names for wind direction (degrees 0‑360) and speed.
+    dir_bin_size : float, optional
+        Width of directional sectors in degrees (default 22.5 ° → 16 sectors).
+    speed_bins : sequence, optional
+        Bin edges for speed categories.  Last edge may be *np.inf*.
+    speed_labels : list, optional
+        Custom labels for the speed categories (must match len(speed_bins)‑1).
+        If *None*, pandas IntervalIndex labels are kept.
+    drop_na : bool, optional
+        Drop rows with NA directions/speeds before binning.
+
+    Returns
+    -------
+    pandas.DataFrame with columns:
+        * direction   – categorical sector label
+        * speed       – categorical speed bin label (Interval or supplied label)
+        * frequency   – count of samples in that cell
+        * frequency_pct – relative frequency (%) of that cell
     """
-    # group by 0-2, 2-4, 4-6, 6-8, 8-10, 10-12, 12-14, and >14 m/s bins
-    df['speed_bins'] = pd.cut(df[wind_spd_var], 
-                                           bins=[0,2,4,6,8,10,12,14,50], 
-                                           labels=['0-2','2-4','4-6','6-8','8-10','10-12','12-14','>14+'])
-    # group by cardinal wind directions
-    theta_labels = [
-            'N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE',
-             'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW', 
-        ]
-    theta_angles = np.arange(0, 360.1, 22.5)
-    df['dir_bins'] = pd.cut(df[wind_dir_var], 
-                                         bins=theta_angles, 
-                                         labels=theta_labels)
-    windrose_df = df.groupby(['dir_bins','speed_bins']).count().dropna()
-    windrose_df['direction'] = windrose_df.index.get_level_values('dir_bins')
-    windrose_df['speed'] = windrose_df.index.get_level_values('speed_bins')
-    windrose_df = windrose_df[
-                ['direction','speed', wind_spd_var]
-            ].droplevel(0).reset_index().drop('speed_bins',axis=1)
-    windrose_df.rename(columns={wind_spd_var:'frequency'}, inplace=True)
-    # divide frequency by the total sum as a percentage
-    windrose_df['frequency'] = 100*windrose_df['frequency']/windrose_df['frequency'].sum() 
-    return windrose_df
+    # ------------------------------------------------------------------ 1. Parse inputs
+    if isinstance(df_or_speed, pd.DataFrame):
+        speed = df_or_speed[wind_spd_var]
+        direction = df_or_speed[wind_dir_var]
+    else:
+        raise ValueError(
+            "Pass a DataFrame containing speed & direction columns "
+            "for the simplest usage."
+        )
+
+    if drop_na:
+        mask = speed.notna() & direction.notna()
+        speed, direction = speed[mask], direction[mask]
+
+    # ------------------------------------------------------------------ 2. Direction sectors
+    # Ensure all directions are 0 ≤ dir < 360
+    direction = direction % 360                      # ensure 0 ≤ dir < 360
+    half = dir_bin_size / 2
+    dir_edges = np.arange(-half, 360 + half, dir_bin_size)
+
+    # One label per interval: centre angle of each sector (e.g. 0°, 30°, …)
+    sector_centres = (dir_edges[:-1] + dir_edges[1:]) / 2
+    sector_labels  = (sector_centres % 360).astype(int)   # wrap 360→0
+
+    direction_cat = pd.cut(
+        direction,
+        bins=dir_edges,
+        labels=sector_labels,        # now len(labels) == len(edges)‑1 ✔
+        ordered=True,
+        right=False,                 # left‑inclusive, right‑exclusive
+        include_lowest=True,
+    )
+
+    # ------------------------------------------------------------------ 3. Speed bins
+    speed_cat = pd.cut(speed, bins=speed_bins, labels=speed_labels, right=True)
+
+    # ------------------------------------------------------------------ 4. Frequency table
+    rose = (
+        pd.DataFrame({"direction": direction_cat, "speed": speed_cat})
+        .groupby(["direction", "speed"], observed=True)
+        .size()
+        .rename("frequency")
+        .reset_index()
+    )
+
+    # percentage frequency
+    rose["frequency_pct"] = rose["frequency"] / rose["frequency"].sum() * 100
+
+    return rose
 
 def simple_sounding(ds):
     """
