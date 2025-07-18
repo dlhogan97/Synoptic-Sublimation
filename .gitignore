@@ -5,7 +5,9 @@
 # Session Data files
 /01_data/raw_data/
 /01_data/processed_data/
+/01_data/01_data/
 /04_products/figures/sandbox/
+/01_data/storage/
 
 # knitr and R markdown default cache directories
 /*_cache/
