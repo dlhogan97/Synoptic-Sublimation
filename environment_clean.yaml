@@ -2,7 +2,7 @@ name: sublime_synoptics
 channels:
   - conda-forge
 dependencies:
-  - python=3.11
+  - python=3.10
   - geopandas
   - rioxarray
   - metpy
@@ -14,7 +14,7 @@ dependencies:
   - jupyter
   - notebook
   - certifi
-  - plotly=5.18.0
+  - plotly 
   - pint-xarray
   - act-atmos
   - nctoolkit
@@ -30,6 +30,7 @@ dependencies:
   - basemap
   - graphviz
   - python-graphviz
+  - python-cdo
   - zarr
   - xgboost
   - imbalanced-learn
@@ -37,4 +38,3 @@ dependencies:
   - matplotlib-scalebar
   - optuna
   - optuna-integration
-prefix: /home/dlhogan/miniforge3/envs/sublime_synoptics
