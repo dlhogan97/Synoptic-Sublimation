@@ -5,7 +5,7 @@ import xarray as xr
 # Pull ERA5 data from the CDS API client
 year = input('Enter year to download:')
 
-if not os.path.exists(f'/storage/dlhogan/data/raw_data/ERA5_reanalysis_{year}.nc'):
+if not os.path.exists(f'/storage/dlhogan/synoptic_sublimation/reanalysis_data/raw_data/ERA5_reanalysis_{year}.nc'):
     dataset = "reanalysis-era5-pressure-levels"
     request = {
         "product_type": ["reanalysis"],
@@ -53,6 +53,6 @@ if not os.path.exists(f'/storage/dlhogan/data/raw_data/ERA5_reanalysis_{year}.nc
     }
 
     client = cdsapi.Client()
-    client.retrieve(dataset, request,f'/storage/dlhogan/data/raw_data/ERA5_reanalysis_{year}.nc')
+    client.retrieve(dataset, request,f'/storage/dlhogan/synoptic_sublimation/reanalysis_data/raw_data/ERA5_reanalysis_{year}.nc')
 else:
-    xr.open_dataset(f'/storage/dlhogan/data/raw_data/ERA5_reanalysis_{year}.nc')
+    xr.open_dataset(f'/storage/dlhogan/synoptic_sublimation/reanalysis_data/raw_data/ERA5_reanalysis_{year}.nc')
